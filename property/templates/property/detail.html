@@ -1,0 +1,79 @@
+{% extends 'base.html' %}
+{% load bootstrap4 %}
+{% block body %}
+
+  <section class="probootstrap-slider flexslider2 page-inner">
+    <div class="overlay"></div>
+    <div class="probootstrap-wrap-banner">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-8">
+
+            <div class="page-title probootstrap-animate">
+              <div class="probootstrap-breadcrumbs">
+                <a href="#">Home</a><span> <a href="{% url 'property:property_list' %}"> Property </a></span>{{property_detail}}
+              </div>
+              <h1>{{property_detail}}</h1>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+    <ul class="slides">
+      <li style="background-image: url(img/slider_1.jpg);"></li>
+      <li style="background-image: url(img/slider_4.jpg);"></li>
+      <li style="background-image: url(img/slider_2.jpg);"></li>
+    </ul>
+  </section>
+  <!-- END: slider  -->
+
+  <section class="probootstrap-section">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <p><img src="{{property_detail.image.url}}" class="img-responsive center-block" alt="Free Bootstrap Template by uicookies.com"></p>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-12">
+          <h2>Detail</h2>
+          {% if property_detail.property_type == "sale" %}
+          <p>Type : For Sale</p>
+          {% else %}
+          <p>Type : For Rent</p>
+          {% endif %}
+          <p>Price : {{property_detail.price}}</p>
+          <p>Area : {{property_detail.area}}</p>
+          <p>Beds : {{property_detail.beds_number}}</p>
+          <p>Bath Tubs : {{property_detail.baths_number}}</p>
+          <p>Garages : {{property_detail.garages_number}}</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <section class="probootstrap-section">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          {% if property_detail.property_type == "sale" %}
+          <p>Buy This Property</p>
+          {% else %}
+          <p>Rent This Property</p>
+          {% endif %}
+          <form action="" method="post">
+            {% csrf_token %}
+            {% bootstrap_form reserve_form %}
+            {% buttons %}
+            <button type="submit" class="btn btn-primary">Submit</button>
+            {% endbuttons %}
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+   {% endblock body %}
