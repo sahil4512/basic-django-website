@@ -1,4 +1,4 @@
 # basic-django-website
 
 
-Worked on Views | Model | Sending Emails
+<h1>Every Section Has there own app<h1>
